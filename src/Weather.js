@@ -60,7 +60,7 @@ export default function Weather() {
               <li id="date">September, 1, 2020</li>
             </ul>
           </div>
-          <ul id="extra-information">
+          <ul className="extra-information">
             <li>
               Humidity <span id="humidity"> 20 </span>%
             </li>
