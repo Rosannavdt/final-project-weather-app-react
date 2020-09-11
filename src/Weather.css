@@ -45,6 +45,9 @@ footer {
   padding: 40px;
   border-radius: 5px;
 }
+.currentTemp {
+  font-size: 60px;
+}
 
 .temperatureBlock {
   margin-top: 55px;
