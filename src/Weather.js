@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
+import FormattedDate from "./FormattedDate";
+import DisplayDay from "./DisplayDay";
+import DisplayTime from "./DisplayTime";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
@@ -9,6 +12,7 @@ export default function Weather(props) {
     setWeatherData({
       ready: true,
       iconUrl: "https://pngmart.com/files/3/Sun-PNG-Transparent-Image.png",
+      date: new Date(response.data.dt * 1000),
       temperature: response.data.main.temp,
       humidity: response.data.main.humidity,
       description: response.data.weather[0].description,
@@ -73,9 +77,15 @@ export default function Weather(props) {
             <div className="col-6" id="city-date-block">
               <h1 id="city">{weatherData.city} </h1>
               <ul className="date">
-                <li id="time">08:00</li>
-                <li id="day">Tuesday</li>
-                <li id="date">September, 1, 2020</li>
+                <li id="time">
+                  <DisplayTime time={weatherData.date} />
+                </li>
+                <li id="day">
+                  <DisplayDay day={weatherData.date} />{" "}
+                </li>
+                <li id="date">
+                  <FormattedDate date={weatherData.date} />
+                </li>
               </ul>
             </div>
             <ul className="extra-information">
