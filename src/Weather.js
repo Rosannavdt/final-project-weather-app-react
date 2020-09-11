@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
-import FormattedDate from "./FormattedDate";
-import DisplayDay from "./DisplayDay";
-import DisplayTime from "./DisplayTime";
+import WeatherInfo from "./WeatherInfo";
 
 export default function Weather(props) {
+  const [city, setCity] = useState(props.defaultCity);
   const [weatherData, setWeatherData] = useState({ ready: false });
   function handleResponse(response) {
     console.log(response.data);
@@ -21,12 +20,26 @@ export default function Weather(props) {
     });
   }
 
+  function search() {
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=dd7b8dcf6824a84cbddcbe0b7bc1a661&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search(city);
+  }
+
+  function updateCity(event) {
+    setCity(event.target.value);
+  }
+
   if (weatherData.ready) {
     return (
       <div className="Weather">
         <div className="weather-app-wrapper">
           <div className="weather-app">
-            <form id="search-form">
+            <form id="search-form" onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col-5">
                   <input
@@ -34,7 +47,8 @@ export default function Weather(props) {
                     placeholder="Enter the city"
                     className="form-control"
                     id="input"
-                    autoComplete="off"
+                    autoFocus="on"
+                    onChange={updateCity}
                   />
                 </div>
                 <div className="col-3">
@@ -44,66 +58,13 @@ export default function Weather(props) {
                 </div>
               </div>
             </form>
-          </div>
-          <div className="row">
-            <div className="col-5">
-              <div className="temperatureBlock">
-                <div className="clearfix weather-temperature">
-                  <img
-                    src={weatherData.iconUrl}
-                    alt={weatherData.description}
-                    className="float-left"
-                    id="current-weather-icon"
-                    width="40px"
-                  />
-                  <div className="temperature-unit-block">
-                    <p className="currentTemp">
-                      {Math.round(weatherData.temperature)}
-                    </p>
-                    <span className="units">
-                      <a href="/" id="celsius-link" className="active">
-                        °C
-                      </a>{" "}
-                      |
-                      <a href="/" id="fahrenheit-link">
-                        °F{" "}
-                      </a>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div id="description">{weatherData.description}</div>
-            </div>
-            <div className="col-6" id="city-date-block">
-              <h1 id="city">{weatherData.city} </h1>
-              <ul className="date">
-                <li id="time">
-                  <DisplayTime time={weatherData.date} />
-                </li>
-                <li id="day">
-                  <DisplayDay day={weatherData.date} />{" "}
-                </li>
-                <li id="date">
-                  <FormattedDate date={weatherData.date} />
-                </li>
-              </ul>
-            </div>
-            <ul className="extra-information">
-              <li>
-                Humidity: <span id="humidity"> {weatherData.humidity} </span>%
-              </li>
-              <li>
-                Wind: <span id="wind"></span> {weatherData.wind} km/h
-              </li>
-            </ul>
+            <WeatherInfo data={weatherData} />
           </div>
         </div>
       </div>
     );
   } else {
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=dd7b8dcf6824a84cbddcbe0b7bc1a661&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
-
+    search();
     return "loading";
   }
 }
