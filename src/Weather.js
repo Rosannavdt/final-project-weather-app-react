@@ -10,7 +10,7 @@ export default function Weather(props) {
     console.log(response.data);
     setWeatherData({
       ready: true,
-      iconUrl: "https://pngmart.com/files/3/Sun-PNG-Transparent-Image.png",
+      iconUrl: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       date: new Date(response.data.dt * 1000),
       temperature: response.data.main.temp,
       humidity: response.data.main.humidity,
