@@ -10,7 +10,7 @@ export default function Weather(props) {
     console.log(response.data);
     setWeatherData({
       ready: true,
-      iconUrl: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      icon: response.data.weather[0].icon,
       date: new Date(response.data.dt * 1000),
       temperature: response.data.main.temp,
       humidity: response.data.main.humidity,
@@ -47,7 +47,7 @@ export default function Weather(props) {
                     placeholder="Enter the city"
                     className="form-control"
                     id="input"
-                    autoFocus="on"
+                    autoComplete="off"
                     onChange={updateCity}
                   />
                 </div>

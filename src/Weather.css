@@ -1,8 +1,9 @@
 body {
   font-family: "Josefin Sans", sans-serif;
 }
-img {
-  width: 50px;
+.float-left canvas {
+  margin-left: 10px;
+  margin-right: 20px;
 }
 h1 {
   font-weight: 600;
@@ -40,7 +41,7 @@ footer {
   margin: 30px auto;
   margin-bottom: 10px;
   color: #fff;
-  background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+  background-image: linear-gradient(to top, #d299c2 0%, #fef9d7 100%);
   border: 1px solid #dadde1;
   padding: 40px;
   border-radius: 5px;
