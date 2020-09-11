@@ -3,6 +3,7 @@ import FormattedDate from "./FormattedDate";
 import DisplayDay from "./DisplayDay";
 import DisplayTime from "./DisplayTime";
 import WeatherIcon from "./WeatherIcon";
+import WeatherUnits from "./WeatherUnits";
 
 export default function WeatherInfo(props) {
   return (
@@ -17,20 +18,7 @@ export default function WeatherInfo(props) {
                   alt={props.data.description}
                 />
               </div>
-              <div className="temperature-unit-block">
-                <p className="currentTemp">
-                  {Math.round(props.data.temperature)}
-                </p>
-                <span className="units">
-                  <a href="/" id="celsius-link" className="active">
-                    °C
-                  </a>{" "}
-                  |
-                  <a href="/" id="fahrenheit-link">
-                    °F{" "}
-                  </a>
-                </span>
-              </div>
+              <WeatherUnits celsius={props.data.temperature} />
             </div>
           </div>
           <div id="description">{props.data.description}</div>
