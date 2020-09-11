@@ -9,6 +9,7 @@ export default function App() {
         <a
           href="https://github.com/Rosannavdt/final-project-weather-app-react"
           target="_blank"
+          rel="noopener noreferrer"
         >
           Open-sourced code
         </a>
@@ -16,9 +17,9 @@ export default function App() {
         <a
           href="https://www.linkedin.com/in/rosannavandentillaar/"
           target="_blank"
+          rel="noopener noreferrer"
         >
-          {" "}
-          Rosanna van den Tillaar{" "}
+          Rosanna van den Tillaar
         </a>
       </footer>
     </div>
