@@ -48,11 +48,11 @@ footer {
 }
 .currentTemp {
   font-size: 60px;
+  margin-bottom: 0px;
 }
 
 .temperatureBlock {
   margin-top: 55px;
-  margin-bottom: 10px;
 }
 
 .weather-temperature img {
